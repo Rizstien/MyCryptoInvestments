@@ -59,6 +59,10 @@ public class Main {
                     case "2":
                         System.out.println("Please enter token symbol: ");
                         tokenInput = scanner.next();
+                        if(!TOKENS_LIST.contains(tokenInput)){
+                            System.out.println("Input token value doesn't exist in transactions record");
+                            break;
+                        }
                         Double tokenBalance = CryptoInvestmentDAO.tokenValUSD(tokenInput, conn);
                         System.out.println("Total balance of token : "+tokenInput+" is "+tokenBalance*Double.parseDouble(tokenUSDVal.get(tokenInput))+" USD");
                         break;
@@ -73,12 +77,17 @@ public class Main {
                     case "4":
                         System.out.println("Please enter token symbol: ");
                         tokenInput = scanner.next();
+                        if(!TOKENS_LIST.contains(tokenInput)){
+                            System.out.println("Input token value doesn't exist in transactions record");
+                            break;
+                        }
                         System.out.println("Please enter date in format MM/dd/yyyy: ");
                         dateInput = scanner.next();
                         tokenBalance = CryptoInvestmentDAO.tokenValUSDDate(tokenInput,dateInput, conn);
                         System.out.println("Total balance of token : "+tokenInput+" is "+tokenBalance*Double.parseDouble(tokenUSDVal.get(tokenInput))+" USD on date "+dateInput);
                         break;
                     default:
+                        System.out.println("Invalid input value ! ");
                         break;
                 }
             }
